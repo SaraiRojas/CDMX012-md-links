@@ -21,8 +21,9 @@ const commandValidation = (validation, stats) => {
         stats: true,
       };
     default:
-      return 'Wrong command';
+      console.log('Wrong command');
   }
+  return null;
 };
 
 module.exports = commandValidation;
