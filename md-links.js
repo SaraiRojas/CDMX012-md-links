@@ -2,7 +2,7 @@
 
 const commandValidation = require('./lib/command-validation');
 const doesPathExist = require('./lib/path-validation');
-const traversDir = require('./lib/traverse-dir');
+const getMdFiles = require('./lib/traverse-dir');
 
 const inputPath = process.argv[2];
 const validation = process.argv[3];
@@ -14,7 +14,7 @@ console.log(options);
 const pathExistance = doesPathExist(inputPath);
 
 if (pathExistance) {
-  const mdFiles = traversDir(inputPath);
+  const mdFiles = getMdFiles(inputPath);
   console.log(mdFiles);
 } else {
   console.log('Error');
