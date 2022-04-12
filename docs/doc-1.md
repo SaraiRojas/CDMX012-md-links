@@ -15,3 +15,5 @@ A continuación puedes ver los objetivos de aprendizaje de este proyecto:
 - [ ] Uso de CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 - Este proyecto se debe "resolver" de manera individual
+- https://docs.npmjs.com/files/package.json
+- https://docs.npmjs.com/files/package.json
