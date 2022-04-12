@@ -4,7 +4,7 @@ const path = require('path');
 const commandValidation = require('./lib/command-validation');
 const doesPathExist = require('./lib/path-validation');
 const getMdFiles = require('./lib/traverse-dir');
-const getLinks = require('./lib/get-links');
+const get = require('./lib/get-links');
 
 const inputPath = process.argv[2];
 const validation = process.argv[3];
@@ -17,26 +17,15 @@ console.log(options);
 const mdLinks = (_path, _options = options) => new Promise((resolve, reject) => {
   const pathResolve = path.resolve(_path);
   const pathExistance = doesPathExist(pathResolve);
-  let Links;
+  // let Links;
   if (pathExistance) {
     const isDirectory = fs.statSync(pathResolve).isDirectory();
     if (isDirectory) {
       const mdFiles = getMdFiles(pathResolve);
-      const promises = [];
-      mdFiles.forEach((file) => {
-        promises.push(getLinks(file)
-          .then((links) => links));
-      });
-      resolve(Promise.all(promises));
-      // Links = Promise.all(promises);
+      resolve(get.LinksFiles(mdFiles));
     } else {
-      resolve(getLinks(pathResolve));
-      // getLinks(pathResolve)
-      //   .then((links) => resolve(links));
+      resolve(get.LinksFile(pathResolve));
     }
-    // Links.then((data) => {
-    //   resolve(data);
-    // });
   } else {
     reject(new Error('Path provided does not exist'));
   }
@@ -44,5 +33,5 @@ const mdLinks = (_path, _options = options) => new Promise((resolve, reject) => 
 
 mdLinks(inputPath)
   .then((res) => {
-    console.log(res);
+    console.log(res.flat());
   });
