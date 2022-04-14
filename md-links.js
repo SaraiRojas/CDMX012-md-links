@@ -25,8 +25,10 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
     if (isDirectory) {
       const mdFiles = getMdFiles(pathResolve);
       Links = getLinks(mdFiles);
-    } else {
+    } else if (path.extname(pathResolve) === '.md') {
       Links = getLinks([pathResolve]);
+    } else {
+      reject('Path provided is not a markdown file\n\n');
     }
 
     if (!_options.validate && !_options.stats) {
