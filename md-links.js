@@ -7,13 +7,13 @@ const doesPathExist = require('./lib/path-validation');
 const getMdFiles = require('./lib/traverse-dir');
 const getLinks = require('./lib/get-links');
 const linksValidation = require('./lib/links-validation');
+const basicStats = require('./lib/stats');
 
 const inputPath = process.argv[2];
 const validation = process.argv[3];
 const stats = process.argv[4];
 
 const options = commandValidation(validation, stats);
-console.log(options);
 
 // eslint-disable-next-line no-unused-vars
 const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
@@ -42,6 +42,7 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
         break;
 
       case 'false|true':
+        resolve(basicStats(Links));
         break;
 
       case 'false|false':
