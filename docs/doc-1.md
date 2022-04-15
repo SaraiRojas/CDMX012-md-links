@@ -8,7 +8,7 @@ A continuación puedes ver los objetivos de aprendizaje de este proyecto:
 ### Node
 
 - [ ] Uso de sistema de archivos. ([fs](https://nodejs.org/api/fs.html), [path](https://nodejs.org/api/path.html))
-- [ ] Instalar y usar módulos. ([npm](https://www.npmjs.om/)) #
+- [ ] Instalar y usar módulos. ([npm](https://www.npmjs.c/)) #
 - [ ] Creación de modules. [(CommonJS)](https://nodejs.org/docs/latest-v0.10.x/api/modules.html)
 - [ ] [Configuración de package.json.](https://docs.npmjs.com/files/package.json)
 - [ ] [Configuración de npm-scripts](https://docs.npmjs.com/m/scripts) #
