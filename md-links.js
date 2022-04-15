@@ -7,7 +7,7 @@ const doesPathExist = require('./lib/path-validation');
 const getMdFiles = require('./lib/traverse-dir');
 const getLinks = require('./lib/get-links');
 const linksValidation = require('./lib/links-validation');
-const basicStats = require('./lib/stats');
+const getStats = require('./lib/stats');
 
 const inputPath = process.argv[2];
 const validation = process.argv[3];
@@ -17,6 +17,12 @@ const options = commandValidation(validation, stats);
 
 // eslint-disable-next-line no-unused-vars
 const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
+  if (_path === undefined) {
+    reject('Please introduce a path\n\n');
+  }
+  if (_options === null) {
+    reject('Wrong command: Valid options\n\n --validate\n --stats\n --validate --stats\n\n');
+  }
   const pathResolve = path.resolve(_path);
   let Links;
 
@@ -35,6 +41,10 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
     // eslint-disable-next-line default-case
     switch (`${_options.validate}|${_options.stats}`) {
       case 'true|true':
+        linksValidation(Links)
+          .then((res) => {
+            resolve(getStats(res, true));
+          });
         break;
 
       case 'true|false':
@@ -42,7 +52,7 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
         break;
 
       case 'false|true':
-        resolve(basicStats(Links));
+        resolve(getStats(Links, false));
         break;
 
       case 'false|false':
