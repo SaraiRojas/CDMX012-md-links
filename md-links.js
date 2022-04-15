@@ -6,6 +6,7 @@ const commandValidation = require('./lib/command-validation');
 const doesPathExist = require('./lib/path-validation');
 const getMdFiles = require('./lib/traverse-dir');
 const getLinks = require('./lib/get-links');
+const linksValidation = require('./lib/links-validation');
 
 const inputPath = process.argv[2];
 const validation = process.argv[3];
@@ -31,8 +32,21 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
       reject('Path provided is not a markdown file\n\n');
     }
 
-    if (!_options.validate && !_options.stats) {
-      resolve(Links);
+    // eslint-disable-next-line default-case
+    switch (`${_options.validate}|${_options.stats}`) {
+      case 'true|true':
+        break;
+
+      case 'true|false':
+        resolve(linksValidation(Links));
+        break;
+
+      case 'false|true':
+        break;
+
+      case 'false|false':
+        resolve(Links);
+        break;
     }
   } else {
     reject('Path provided does not exist\n\n');
