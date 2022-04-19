@@ -34,7 +34,9 @@
     "lib",
     "test",
     "docs",
-    "md-links.js"
+    "md-links.js",
+    "package.json",
+    "test"
   ],
   "devDependencies": {
     "eslint": "^8.12.0",
