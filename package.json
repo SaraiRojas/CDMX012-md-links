@@ -1,6 +1,26 @@
 {
   "name": "md-links",
+  "description": "Command line tool (CLI) and exportable library to extract links form markdown files",
   "version": "0.1.0",
+  "keywords": [
+    "links",
+    "terminal",
+    "markdown"
+],
+  "homepage": "https://github.com/SaraiRojas/CDMX012-md-links",
+  "bugs": "https://github.com/SaraiRojas/CDMX012-md-links/issues",
+  "license": "MIT",
+  "author": "Sarai Rojas",
+  "contributors": [
+    {
+        "name": "Sarai Rojas",
+        "url": "https://github.com/SaraiRojas"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SaraiRojas/CDMX012-md-links.git"
+  },
   "engines": {
     "node": ">=14.x"
   },
@@ -8,6 +28,14 @@
     "lint": "eslint --ext .js CDMX012-md-links/",
     "test": "jest --coverage"
   },
+  "main": "md-links.js",
+  "files": [
+    "README.md",
+    "lib",
+    "test",
+    "docs",
+    "md-links.js"
+  ],
   "devDependencies": {
     "eslint": "^8.12.0",
     "eslint-config-airbnb-base": "^15.0.0",
