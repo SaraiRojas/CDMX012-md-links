@@ -64,6 +64,8 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
   }
 });
 
+module.exports = mdLinks;
+
 mdLinks(inputPath, options)
   .then((res) => {
     console.log(res);
