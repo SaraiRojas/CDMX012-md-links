@@ -6,15 +6,15 @@
     "links",
     "terminal",
     "markdown"
-],
+  ],
   "homepage": "https://github.com/SaraiRojas/CDMX012-md-links",
   "bugs": "https://github.com/SaraiRojas/CDMX012-md-links/issues",
   "license": "MIT",
   "author": "Sarai Rojas",
   "contributors": [
     {
-        "name": "Sarai Rojas",
-        "url": "https://github.com/SaraiRojas"
+      "name": "Sarai Rojas",
+      "url": "https://github.com/SaraiRojas"
     }
   ],
   "repository": {
@@ -29,15 +29,6 @@
     "test": "jest --coverage"
   },
   "main": "md-links.js",
-  "files": [
-    "README.md",
-    "lib",
-    "test",
-    "docs",
-    "md-links.js",
-    "package.json",
-    "test"
-  ],
   "devDependencies": {
     "eslint": "^8.12.0",
     "eslint-config-airbnb-base": "^15.0.0",

@@ -1,11 +1,8 @@
-/* eslint-disable quotes */
-/* eslint-disable arrow-body-style */
-/* eslint-disable no-undef */
 const mock = require('mock-fs');
 const mdLinks = require('../md-links');
 
 describe('mdLinks', () => {
-  test('should return path provided does not exist', () => {
+  test('should be a function', () => {
     expect(typeof (mdLinks)).toBe('function');
   });
 
@@ -20,7 +17,7 @@ describe('mdLinks', () => {
     });
   });
 
-  test('should return path provided does not exist', () => {
+  test('should return Wrong command: ..', () => {
     const pat = '../stats';
     const options = null;
     return mdLinks(pat, options).catch((err) => {
@@ -28,7 +25,7 @@ describe('mdLinks', () => {
     });
   });
 
-  test('should return path provided does not exist', () => {
+  test('should return Please introduce a path', () => {
     const pat = undefined;
     const options = null;
     return mdLinks(pat, options).catch((err) => {
@@ -36,7 +33,7 @@ describe('mdLinks', () => {
     });
   });
 
-  test('should return path provided does not exist', () => {
+  test('should return Path provided is not a markdown file', () => {
     const pat = './docs/doc-3.js';
     const options = {
       validate: false,
@@ -53,9 +50,9 @@ describe('mdLinks', () => {
     mock({
       folder1: {
         'index1.md': 'Creación de modules. [(CommonJS)](https://nodejs.org/docs/latest-v0.10.x/api/modules.html) hfgjjyngh',
-        'index2.html': 'Hello world!!!!!!!!!!!!!!!!',
+        'index2.html': '<p>Welcome back<p>',
         folder2: {
-          'index3.md': 'Creación de modules. [(CommonJS)](https://nodejs.org/docs/latest-v0.10.x/api/modules.html) hfgjjyngh',
+          'index3.md': 'El [algoritmo de Luhn](https://es.wikipedia.org/wiki/Algoritmo_de_Luhn),también',
           'index4.txt': 'Hello world!!!!!!!!!!!!!!!!',
         },
       },
@@ -66,7 +63,7 @@ describe('mdLinks', () => {
     mock.restore();
   });
 
-  test('should return path provided does not exist', () => {
+  test('should return an array of objects', () => {
     const pat = `${process.cwd()}/folder1`;
     const options = {
       validate: false,
@@ -74,14 +71,14 @@ describe('mdLinks', () => {
     };
     const result = [
       {
-        file: "C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\folder2\\index3.md",
-        href: "https://nodejs.org/docs/latest-v0.10.x/api/modules.html",
-        text: "(CommonJS)",
+        file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\folder2\\index3.md',
+        href: 'https://es.wikipedia.org/wiki/Algoritmo_de_Luhn',
+        text: 'algoritmo de Luhn',
       },
       {
-        file: "C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\index1.md",
-        href: "https://nodejs.org/docs/latest-v0.10.x/api/modules.html",
-        text: "(CommonJS)",
+        file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\index1.md',
+        href: 'https://nodejs.org/docs/latest-v0.10.x/api/modules.html',
+        text: '(CommonJS)',
       },
     ];
     return mdLinks(pat, options).then((res) => {
@@ -89,31 +86,31 @@ describe('mdLinks', () => {
     });
   });
 
-  test('should return path provided does not exist', () => {
+  test('should return an objects with two properties', () => {
     const pat = `${process.cwd()}/folder1`;
     const options = {
       validate: false,
       stats: true,
     };
-    const result = { total: 2, unique: 1 };
+    const result = { total: 2, unique: 2 };
     return mdLinks(pat, options).then((res) => {
       expect(res).toEqual(result);
     });
   });
 
-  test('should return path provided does not exist', () => {
+  test('should return an objects with three properties', () => {
     const pat = `${process.cwd()}/folder1`;
     const options = {
       validate: true,
       stats: true,
     };
-    const result = { total: 2, unique: 1, broken: 0 };
+    const result = { total: 2, unique: 2, broken: 0 };
     return mdLinks(pat, options).then((res) => {
       expect(res).toEqual(result);
     });
   });
 
-  test('should return path provided does not exist', () => {
+  test('should return an array of objects', () => {
     const pat = `${process.cwd()}/folder1`;
     const options = {
       validate: true,
@@ -121,17 +118,17 @@ describe('mdLinks', () => {
     };
     const result = [
       {
-        file: "C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\folder2\\index3.md",
-        href: "https://nodejs.org/docs/latest-v0.10.x/api/modules.html",
+        file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\folder2\\index3.md',
+        href: 'https://es.wikipedia.org/wiki/Algoritmo_de_Luhn',
         statusCode: 200,
-        statusText: "OK",
-        text: "(CommonJS)",
+        statusText: 'OK',
+        text: 'algoritmo de Luhn',
       }, {
-        file: "C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\index1.md",
-        href: "https://nodejs.org/docs/latest-v0.10.x/api/modules.html",
+        file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\index1.md',
+        href: 'https://nodejs.org/docs/latest-v0.10.x/api/modules.html',
         statusCode: 200,
-        statusText: "OK",
-        text: "(CommonJS)",
+        statusText: 'OK',
+        text: '(CommonJS)',
       },
     ];
     return mdLinks(pat, options).then((res) => {

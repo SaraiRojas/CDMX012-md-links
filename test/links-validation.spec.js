@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
 const linksValidation = require('../lib/links-validation');
 
-describe('modifyFile script', () => {
+describe('linksValidation', () => {
   test('should return an array containing an object with file, href, text, statusCode and statusText', () => {
     const paths = [{
       file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\docs\\doc-1.md',
