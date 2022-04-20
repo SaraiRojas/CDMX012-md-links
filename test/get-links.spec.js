@@ -1,38 +1,28 @@
-/* eslint-disable no-undef */
-const mock = require('mock-fs');
 const getLinks = require('../lib/get-links');
 
-describe('modifyFile script', () => {
-  beforeAll(() => {
-    mock({
-      folderName: {
-        'index.md': 'Creación de modules. [(CommonJS)](https://nodejs.org/docs/latest-v0.10.x/api/modules.html) hfgjjyngh',
-        'index2.md': 'Hello world!!!!!!!!!!!!!!!!',
-      },
-    });
-  });
-
-  afterAll(() => {
-    mock.restore();
-  });
-
+describe('getLinks', () => {
   test('should return an array containing an object with file, href and text', () => {
-    const file = `${process.cwd()}/folderName/index.md`;
-    const expectedResult = [{
-      file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links/folderName/index.md',
-      href: 'https://nodejs.org/docs/latest-v0.10.x/api/modules.html',
-      text: '(CommonJS)',
-    }];
+    const expectedResult = [
+      {
+        file: './docs/doc-5.md',
+        href: 'https://es.wikipedia.org/wiki/Algoritmo_de_Luhn',
+        text: 'algoritmo de Luhn',
+      },
+      {
+        file: './docs/doc-5.md',
+        href: 'https://www.101computing.net/wp/wp-content/uploads/Luhn-Algorithm.png',
+        text: 'gráfica de algoritmo de Luhn',
+      },
+    ];
 
-    const result = getLinks([file]);
+    const result = getLinks(['./docs/doc-5.md']);
     expect(result).toEqual(expectedResult);
   });
 
   test('should return an empty array', () => {
-    const file = `${process.cwd()}/folderName/index2.md`;
     const expectedResult = [];
 
-    const result = getLinks([file]);
+    const result = getLinks(['./docs/doc-4.md']);
     expect(result).toEqual(expectedResult);
   });
 });
