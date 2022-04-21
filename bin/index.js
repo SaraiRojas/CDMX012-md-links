@@ -46,25 +46,25 @@ mdLinks(inputPath, opt)
   .then((res) => {
     if (opt.validation === undefined && opt.stats === undefined) {
       res.forEach((item) => {
-        console.log('file:'.key, `${item.file}\n`
+        console.log('\nfile:'.key, `${item.file}\n`
           + 'href:'.key, `${item.href}\n`
-          + 'text:'.key, `${item.text}\n`);
+          + 'text:'.key, `${item.text}`);
       });
     } else if (opt.validation === true && opt.stats === undefined) {
       res.forEach((item) => {
-        console.log('file:'.key, `${item.file}\n`
+        console.log('\nfile:'.key, `${item.file}\n`
           + 'href:'.key, `${item.href}\n`
           + 'text:'.key, `${item.text}\n`
           + 'statusCode:'.key, `${item.statusCode}\n`
-          + 'statusText:'.key, `${item.statusText}\n`);
+          + 'statusText:'.key, `${item.statusText}`);
       });
     } else if (opt.validation === undefined && opt.stats === true) {
-      console.log('total:'.key, `${res.total}\n`
-      + 'unique:'.key, `${res.unique}\n`);
+      console.log('\ntotal:'.key, `${res.total}\n`
+      + 'unique:'.key, `${res.unique}`);
     } else if (opt.validation === true && opt.stats === true) {
-      console.log('total:'.key, `${res.total}\n`
+      console.log('\ntotal:'.key, `${res.total}\n`
       + 'unique:'.key, `${res.unique}\n`
-      + 'broken:'.key, `${res.broken}\n`);
+      + 'broken:'.key, `${res.broken}`);
     }
   })
   .catch((err) => {
