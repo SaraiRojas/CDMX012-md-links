@@ -2,18 +2,11 @@
 const fs = require('fs');
 const path = require('path');
 
-// const commandValidation = require('./lib/command-validation');
 const doesPathExist = require('./lib/path-validation');
 const getMdFiles = require('./lib/traverse-dir');
 const getLinks = require('./lib/get-links');
 const linksValidation = require('./lib/links-validation');
 const getStats = require('./lib/stats');
-
-// const inputPath = process.argv[2];
-// const validation = process.argv[3];
-// const stats = process.argv[4];
-
-// const options = commandValidation(validation, stats);
 
 // eslint-disable-next-line no-unused-vars
 const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
@@ -24,7 +17,6 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
     reject('Wrong command: Valid options\n\n --validate\n --stats\n --validate --stats\n\n');
   }
   const pathResolve = path.resolve(_path);
-  console.log(pathResolve);
   let Links;
 
   if (doesPathExist(pathResolve)) {
