@@ -2,18 +2,18 @@
 const fs = require('fs');
 const path = require('path');
 
-const commandValidation = require('./lib/command-validation');
+// const commandValidation = require('./lib/command-validation');
 const doesPathExist = require('./lib/path-validation');
 const getMdFiles = require('./lib/traverse-dir');
 const getLinks = require('./lib/get-links');
 const linksValidation = require('./lib/links-validation');
 const getStats = require('./lib/stats');
 
-const inputPath = process.argv[2];
-const validation = process.argv[3];
-const stats = process.argv[4];
+// const inputPath = process.argv[2];
+// const validation = process.argv[3];
+// const stats = process.argv[4];
 
-const options = commandValidation(validation, stats);
+// const options = commandValidation(validation, stats);
 
 // eslint-disable-next-line no-unused-vars
 const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
@@ -24,6 +24,7 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
     reject('Wrong command: Valid options\n\n --validate\n --stats\n --validate --stats\n\n');
   }
   const pathResolve = path.resolve(_path);
+  console.log(pathResolve);
   let Links;
 
   if (doesPathExist(pathResolve)) {
@@ -39,7 +40,7 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
     }
 
     // eslint-disable-next-line default-case
-    switch (`${_options.validate}|${_options.stats}`) {
+    switch (`${_options.validation}|${_options.stats}`) {
       case 'true|true':
         linksValidation(Links)
           .then((res) => {
@@ -47,15 +48,15 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
           });
         break;
 
-      case 'true|false':
+      case 'true|undefined':
         resolve(linksValidation(Links));
         break;
 
-      case 'false|true':
+      case 'undefined|true':
         resolve(getStats(Links, false));
         break;
 
-      case 'false|false':
+      case 'undefined|undefined':
         resolve(Links);
         break;
     }
@@ -65,11 +66,3 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
 });
 
 module.exports = mdLinks;
-
-mdLinks(inputPath, options)
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    process.stdout.write(err);
-  });
