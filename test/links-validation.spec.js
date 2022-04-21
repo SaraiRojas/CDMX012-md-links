@@ -1,4 +1,7 @@
+const axios = require('axios');
 const linksValidation = require('../lib/links-validation');
+
+jest.mock('axios');
 
 describe('linksValidation', () => {
   test('should return an array containing an object with file, href, text, statusCode and statusText', () => {
@@ -17,8 +20,8 @@ describe('linksValidation', () => {
       file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\docs\\doc-1.md',
       href: 'https://docs.npmjs.com/issue',
       text: 'npmjs',
-      statusCode: 400,
-      statusText: 'Request failed with status code 404',
+      statusCode: 200,
+      statusText: 'OK',
     },
     {
       file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\docs\\doc-5.md',
@@ -27,6 +30,8 @@ describe('linksValidation', () => {
       statusCode: 200,
       statusText: 'OK',
     }];
+
+    axios.get.mockImplementation(() => Promise.resolve({ status: 200, statusText: 'OK' }));
 
     return linksValidation(paths).then((res) => {
       expect(res).toEqual(result);
