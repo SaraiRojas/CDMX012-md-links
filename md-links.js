@@ -10,12 +10,6 @@ const getStats = require('./lib/stats');
 
 // eslint-disable-next-line no-unused-vars
 const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
-  if (_path === undefined) {
-    reject('Please introduce a path\n\n');
-  }
-  if (_options === null) {
-    reject('Wrong command: Valid options\n\n --validate\n --stats\n --validate --stats\n\n');
-  }
   const pathResolve = path.resolve(_path);
   let Links;
 
