@@ -16,6 +16,12 @@ const stats = process.argv[4];
 const options = commandValidation(validation, stats);
 
 // eslint-disable-next-line no-unused-vars
+/**
+ * Validates links that are contained in markdown files
+ * @param {String} _path path provided via CLI
+ * @param {Object} _options boolean values according to options introduced via CLI
+ * @returns {Promise} Resolve value is an object containing links information
+ */
 const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
   if (_path === undefined) {
     reject('Please introduce a path\n\n');
