@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable prefer-template */
 
 const yargs = require('yargs');
 const colors = require('colors');
