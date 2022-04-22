@@ -1,5 +1,5 @@
 const mock = require('mock-fs');
-const mdLinks = require('../md-links');
+const mdLinks = require('../lib/mdlinks');
 
 describe('mdLinks', () => {
   test('should be a function', () => {
@@ -14,22 +14,6 @@ describe('mdLinks', () => {
     };
     return mdLinks(pat, options).catch((err) => {
       expect(err).toEqual('Path provided does not exist\n\n');
-    });
-  });
-
-  test('should return Wrong command: ..', () => {
-    const pat = '../stats';
-    const options = null;
-    return mdLinks(pat, options).catch((err) => {
-      expect(err).toEqual('Wrong command: Valid options\n\n --validate\n --stats\n --validate --stats\n\n');
-    });
-  });
-
-  test('should return Please introduce a path', () => {
-    const pat = undefined;
-    const options = null;
-    return mdLinks(pat, options).catch((err) => {
-      expect(err).toEqual('Please introduce a path\n\n');
     });
   });
 
@@ -65,10 +49,6 @@ describe('mdLinks', () => {
 
   test('should return an array of objects', () => {
     const pat = `${process.cwd()}/folder1`;
-    const options = {
-      validate: false,
-      stats: false,
-    };
     const result = [
       {
         file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\folder2\\index3.md',
@@ -81,41 +61,13 @@ describe('mdLinks', () => {
         text: '(CommonJS)',
       },
     ];
-    return mdLinks(pat, options).then((res) => {
-      expect(res).toEqual(result);
-    });
-  });
-
-  test('should return an objects with two properties', () => {
-    const pat = `${process.cwd()}/folder1`;
-    const options = {
-      validate: false,
-      stats: true,
-    };
-    const result = { total: 2, unique: 2 };
-    return mdLinks(pat, options).then((res) => {
-      expect(res).toEqual(result);
-    });
-  });
-
-  test('should return an objects with three properties', () => {
-    const pat = `${process.cwd()}/folder1`;
-    const options = {
-      validate: true,
-      stats: true,
-    };
-    const result = { total: 2, unique: 2, broken: 0 };
-    return mdLinks(pat, options).then((res) => {
+    return mdLinks(pat, 'undefined').then((res) => {
       expect(res).toEqual(result);
     });
   });
 
   test('should return an array of objects', () => {
     const pat = `${process.cwd()}/folder1`;
-    const options = {
-      validate: true,
-      stats: false,
-    };
     const result = [
       {
         file: 'C:\\Users\\Laboratoria\\Desktop\\Bootcamp\\Project4\\CDMX012-md-links\\folder1\\folder2\\index3.md',
@@ -131,7 +83,7 @@ describe('mdLinks', () => {
         text: '(CommonJS)',
       },
     ];
-    return mdLinks(pat, options).then((res) => {
+    return mdLinks(pat, true).then((res) => {
       expect(res).toEqual(result);
     });
   });
