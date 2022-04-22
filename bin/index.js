@@ -4,10 +4,12 @@
 const yargs = require('yargs');
 const colors = require('colors');
 const mdLinks = require('../md-links');
+const getStats = require('../lib/stats');
 
 // Color themes
 colors.setTheme({
-  key: 'blue',
+  key: 'magenta',
+  title: 'grey',
 });
 
 const usage = '\nUsage: md-links <file/dir_path> --validate --stats'; const options = yargs
@@ -42,29 +44,45 @@ const opt = {
   stats: options.stats,
 };
 
-mdLinks(inputPath, opt)
+mdLinks(inputPath, opt.validation)
   .then((res) => {
-    if (opt.validation === undefined && opt.stats === undefined) {
-      res.forEach((item) => {
-        console.log('\nfile:'.key, `${item.file}\n`
-          + 'href:'.key, `${item.href}\n`
-          + 'text:'.key, `${item.text}`);
-      });
-    } else if (opt.validation === true && opt.stats === undefined) {
-      res.forEach((item) => {
-        console.log('\nfile:'.key, `${item.file}\n`
-          + 'href:'.key, `${item.href}\n`
-          + 'text:'.key, `${item.text}\n`
-          + 'statusCode:'.key, `${item.statusCode}\n`
-          + 'statusText:'.key, `${item.statusText}`);
-      });
-    } else if (opt.validation === undefined && opt.stats === true) {
-      console.log('\ntotal:'.key, `${res.total}\n`
-      + 'unique:'.key, `${res.unique}`);
-    } else if (opt.validation === true && opt.stats === true) {
-      console.log('\ntotal:'.key, `${res.total}\n`
-      + 'unique:'.key, `${res.unique}\n`
-      + 'broken:'.key, `${res.broken}`);
+    switch (`${opt.validation}|${opt.stats}`) {
+      case 'true|undefined':
+        res.forEach((item) => {
+          console.log('\nfile:'.key, `${item.file}\n`
+                      + 'href:'.key, `${item.href}\n`
+                      + 'text:'.key, `${item.text}\n`
+                      + 'statusCode:'.key, `${item.statusCode}\n`
+                      + 'statusText:'.key, `${item.statusText}`);
+        });
+        break;
+
+      case 'undefined|true': {
+        const basicStats = getStats(res, false);
+
+        console.log('\nBasic stats\n\n'.title
+                    + 'total:'.key, `${basicStats.total}\n`
+                    + 'unique:'.key, `${basicStats.unique}`);
+        break;
+      }
+
+      case 'true|true': {
+        const advancedStats = getStats(res, true);
+
+        console.log('\nAdvanced stats\n\n'.title
+                    + 'total:'.key, `${advancedStats.total}\n`
+                    + 'unique:'.key, `${advancedStats.unique}\n`
+                    + 'broken:'.key, `${advancedStats.broken}`);
+        break;
+      }
+
+      default:
+        res.forEach((item) => {
+          console.log('\nfile:'.key, `${item.file}\n`
+                    + 'href:'.key, `${item.href}\n`
+                    + 'text:'.key, `${item.text}`);
+        });
+        break;
     }
   })
   .catch((err) => {

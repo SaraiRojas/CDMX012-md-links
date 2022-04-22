@@ -6,10 +6,9 @@ const doesPathExist = require('./lib/path-validation');
 const getMdFiles = require('./lib/traverse-dir');
 const getLinks = require('./lib/get-links');
 const linksValidation = require('./lib/links-validation');
-const getStats = require('./lib/stats');
 
 // eslint-disable-next-line no-unused-vars
-const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
+const mdLinks = (_path, askValidation) => new Promise((resolve, reject) => {
   const pathResolve = path.resolve(_path);
   let Links;
 
@@ -25,24 +24,12 @@ const mdLinks = (_path, _options) => new Promise((resolve, reject) => {
       reject('Path provided is not a markdown file\n\n');
     }
 
-    // eslint-disable-next-line default-case
-    switch (`${_options.validation}|${_options.stats}`) {
-      case 'true|true':
-        linksValidation(Links)
-          .then((res) => {
-            resolve(getStats(res, true));
-          });
-        break;
-
-      case 'true|undefined':
+    switch (`${askValidation}`) {
+      case 'true':
         resolve(linksValidation(Links));
         break;
 
-      case 'undefined|true':
-        resolve(getStats(Links, false));
-        break;
-
-      case 'undefined|undefined':
+      default:
         resolve(Links);
         break;
     }
