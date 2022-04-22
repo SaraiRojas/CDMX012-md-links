@@ -1,5 +1,5 @@
 {
-  "name": "sarairojas-md-links",
+  "name": "md-links",
   "description": "Command line tool (CLI) and exportable library to extract links form markdown files",
   "version": "0.1.0",
   "keywords": [

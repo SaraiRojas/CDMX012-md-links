@@ -21,13 +21,13 @@ const usage = '\nUsage: md-links <file/dir_path> --validate --stats'; const opti
   )
   .option('v', {
     alias: 'validate',
-    describe: 'Ask for validation',
+    describe: 'Validates links through a HTTP request',
     type: 'boolean',
     demandOption: false,
   })
   .option('s', {
     alias: 'stats',
-    describe: 'Ask for stats',
+    describe: 'Gives basic or advanced stats about the links',
     type: 'boolean',
     demandOption: false,
   })
