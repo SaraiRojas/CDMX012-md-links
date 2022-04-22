@@ -3,7 +3,7 @@
 
 const yargs = require('yargs');
 const colors = require('colors');
-const mdLinks = require('../md-links');
+const mdLinks = require('../lib/mdlinks');
 const getStats = require('../lib/stats');
 
 // Color themes

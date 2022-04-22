@@ -30,7 +30,7 @@
   },
   "main": "./bin/index.js",
   "bin": {
-    "welc": "./bin/index.js"
+    "md-links": "./bin/index.js"
   },
   "devDependencies": {
     "eslint": "^8.12.0",
