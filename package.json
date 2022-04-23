@@ -1,7 +1,7 @@
 {
   "name": "md-links-sr",
   "description": "Command line tool (CLI) and exportable library to extract links form markdown files",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "links",
     "terminal",
