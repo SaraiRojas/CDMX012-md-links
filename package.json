@@ -28,7 +28,7 @@
     "lint": "eslint --ext .js CDMX012-md-links/",
     "test": "jest --coverage"
   },
-  "main": "./bin/index.js",
+  "main": "./lib/mdlinks.js",
   "bin": {
     "md-links": "./bin/index.js"
   },
