@@ -143,7 +143,7 @@ src="images/mdLinksVS.png"/>
 #### With [npm](https://npmjs.com)
 
 ```
-npm install md-links/sr
+npm install md-links-sr
 ```
 
 #### With Git
