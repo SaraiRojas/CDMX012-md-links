@@ -57,7 +57,7 @@ With `option === true` :
 #### Example
 
 ```js
-const mdLinks = require("md-links");
+const mdLinks = require("md-links-sr");
 
 mdLinks("./some/example.md")
   .then((links) => {
