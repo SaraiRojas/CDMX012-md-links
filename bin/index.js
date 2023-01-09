@@ -1,15 +1,8 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
-const colors = require('colors');
 const mdLinks = require('../lib/mdlinks');
-const getStats = require('../lib/stats');
-
-// Color themes
-colors.setTheme({
-  key: 'magenta',
-  title: 'grey',
-});
+const outputs = require('../lib/helpers');
 
 const usage = '\nUsage: md-links <file/dir_path> --validate --stats'; const options = yargs
   .scriptName('md-links')
@@ -45,45 +38,9 @@ const opt = {
 
 mdLinks(inputPath, opt.validation)
   .then((res) => {
-    switch (`${opt.validation}|${opt.stats}`) {
-      case 'true|undefined':
-        res.forEach((item) => {
-          console.log('\nfile:'.key, `${item.file}\n`
-                      + 'href:'.key, `${item.href}\n`
-                      + 'text:'.key, `${item.text}\n`
-                      + 'statusCode:'.key, `${item.statusCode}\n`
-                      + 'statusText:'.key, `${item.statusText}`);
-        });
-        break;
-
-      case 'undefined|true': {
-        const basicStats = getStats(res, false);
-
-        console.log('\nBasic stats\n\n'.title
-                    + 'total:'.key, `${basicStats.total}\n`
-                    + 'unique:'.key, `${basicStats.unique}`);
-        break;
-      }
-
-      case 'true|true': {
-        const advancedStats = getStats(res, true);
-
-        console.log('\nAdvanced stats\n\n'.title
-                    + 'total:'.key, `${advancedStats.total}\n`
-                    + 'unique:'.key, `${advancedStats.unique}\n`
-                    + 'broken:'.key, `${advancedStats.broken}`);
-        break;
-      }
-
-      default:
-        res.forEach((item) => {
-          console.log('\nfile:'.key, `${item.file}\n`
-                    + 'href:'.key, `${item.href}\n`
-                    + 'text:'.key, `${item.text}`);
-        });
-        break;
-    }
+    const request = `${opt.validation}|${opt.stats}`;
+    outputs[request](res);
   })
   .catch((err) => {
-    process.stdout.write(err);
+    console.log(err.message);
   });
